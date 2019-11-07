@@ -1,5 +1,5 @@
 <head>
-<title >Accessible Q-E range of HRC(BL12) ver 0.2</title>
+<title >Accessible Q-E range of AMATERAS(BL14) ver 0.1</title>
 <link rel="stylesheet" type="text/css" href="./common.css">
 <script type="text/javascript" src="./draw.js"></script>
 </head>
@@ -7,10 +7,11 @@
     <div class="fullbox">
     <table class="header_table">
         <tr>
-            <td ><font class="mytitle">Accessible Q-E range of HRC(BL12)</font> <font color="white">ver 0.2</font></td>
+            <td ><font class="mytitle">Accessible Q-E range of AMATERAS(BL14)</font> <font color="white">ver 0.1</font></td>
             <td class="menu_item"><a href="#sec_TOF">TOF diagram</a></td>
             <td class="menu_item"><a href="#sec_constE">Constant-E cuts</a></td>
-            <td >-----</td>
+            <td class="menu_item"><a href="#sec_definitions">Definitions</a></td>
+            <td class="dummyText">....</td>
         </tr>
     </table>
     </div>
@@ -40,24 +41,21 @@
 <table>
         <tr>
             <td>
-            <canvas id="CanvasTOF" width="500" height="280"></canvas><br />
+            <canvas id="CanvasTOF" width="600" height="400"></canvas><br />
             </td>
             <td>
-                Chopper face at t=0 :
+                <!--Chopper face at t=0 :
                 <select id="chopperFace">
                     <option value="1">Front</option>
                     <option value="0">Back</option>
-                </select> <br />
-                Fermi chopper freq. :
+                </select> <br /-->
+                Monochro chopper (effective) freq. :
                 <select id="freq">
-                    <option value="100">100 Hz</option>
-                    <option value="200">200 Hz</option>
-                    <option value="300">300 Hz</option>
-                    <option value="400">400 Hz</option>
-                    <option value="500">500 Hz</option>
-                    <option value="600">600 Hz</option>
+                    <option value="75">75 Hz (FDC1 300Hz-FDC2 300Hz)</option>
+                    <option value="150">150 Hz(FDC1 0Hz-FDC2 150Hz)</option>
                 </select> <br />
                 Target <i>E</i><sub>i</sub> : <input type="text" size="5" id="targetEi" value="20"> meV <br />
+                Upper limit of <i>E</i><sub>i</sub> : <input type="text" size="5" id="upperLimitEi" value="80"> meV <br />
                 <input type="button" value="   set   " onclick="draw()"/><br />
                 <br />
                 <i>E</i><sub>i</sub> number offset : <input type="text" size="5" id="Ei_Num_ofst" value="0"> (for plotting)<br />
@@ -88,21 +86,29 @@
         </td>
     </tr>
     <tr>
-        <td>
+        <td valign="top">
             <i>a</i>* : <input type="text" size="6" id="a_star" value="1.5"> A<sup>-1</sup><br />
             <i>b</i>* : <input type="text" size="6" id="b_star" value="1.5"> A<sup>-1</sup><br />
             angle between <i>a</i>* and <i>b</i>* : <input type="text" size="6" id="gamma" value="90"> deg.<br />
+            <input type="button" value="   set   " onclick="draw()"/><br />
         </td>
-        <td>
+        <td valign="top">
                 <i>q</i><sub>1</sub> : <i>h</i> <input type="text" size="6" id="qh1" value="0">, <i>k</i> <input type="text" size="6" id="qk1" value="0"><br />
                 <i>q</i><sub>2</sub> : <i>h</i> <input type="text" size="6" id="qh2" value="0">, <i>k</i> <input type="text" size="6" id="qk2" value="0"><br />
                 <i>q</i><sub>3</sub> : <i>h</i> <input type="text" size="6" id="qh3" value="0">, <i>k</i> <input type="text" size="6" id="qk3" value="0"><br />
+                <input type="button" value="   set   " onclick="draw()"/><br />
         </td>
         <td>
-            Det1 : <input type="text" size="6" id="D1_tth_min" value="3.0"> -  <input type="text" size="6" id="D1_tth_max" value="21.5"><br />
-            Det2 : <input type="text" size="6" id="D2_tth_min" value="23.5"> -  <input type="text" size="6" id="D2_tth_max" value="42.0"><br />
-            Det3 : <input type="text" size="6" id="D3_tth_min" value="44.0"> -  <input type="text" size="6" id="D3_tth_max" value="62.5"><br />
-            Det4 : <input type="text" size="6" id="D4_tth_min" value="-31.0"> -  <input type="text" size="6" id="D4_tth_max" value="-13.0"><br />
+            Det11 : <input type="text" size="6" id="D11_tth_min" value="3.25"> -  <input type="text" size="6" id="D11_tth_max" value="8.42"><br />
+            Det10 : <input type="text" size="6" id="D10_tth_min" value="9.38"> -  <input type="text" size="6" id="D10_tth_max" value="21.22"><br />
+            Det9 : <input type="text" size="6" id="D9_tth_min" value="22.18"> -  <input type="text" size="6" id="D9_tth_max" value="34.02"><br />
+            Det8 : <input type="text" size="6" id="D8_tth_min" value="34.98"> -  <input type="text" size="6" id="D8_tth_max" value="46.82"><br />
+            Det7 : <input type="text" size="6" id="D7_tth_min" value="48.18"> -  <input type="text" size="6" id="D7_tth_max" value="60.02"><br />
+            Det6 : <input type="text" size="6" id="D6_tth_min" value="60.98"> -  <input type="text" size="6" id="D6_tth_max" value="72.82"><br />
+            Det5 : <input type="text" size="6" id="D5_tth_min" value="73.78"> -  <input type="text" size="6" id="D5_tth_max" value="85.62"><br />
+            Det4 : <input type="text" size="6" id="D4_tth_min" value="86.58"> -  <input type="text" size="6" id="D4_tth_max" value="98.41"><br />
+            Det3 : <input type="text" size="6" id="D3_tth_min" value="99.38"> -  <input type="text" size="6" id="D3_tth_max" value="111.22"><br />
+            Det2 : <input type="text" size="6" id="D2_tth_min" value="112.18"> -  <input type="text" size="6" id="D2_tth_max" value="118.10"><br />
         </td>
     </tr>
 </table>
@@ -145,6 +151,11 @@ Omega angle : from <input type="text" size="5" id="omega1" value="0"> to <input 
 <br />
 
 
+<div class="dummy_space1" id="sec_definitions">-</div>
+<div class="dummy_space2">-</div>
+
+<div class="section_01">Definitions</div>
+<img src="IMG_AMATERAS_v2.png">
 
 
 <div class="footer"> Version 0.1 by T. Nakajima, 2019.</div>
