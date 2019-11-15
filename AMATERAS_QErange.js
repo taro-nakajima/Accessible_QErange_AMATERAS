@@ -21,10 +21,15 @@ function draw_TOF(){
 
     var TOFscale = 6.0;    // ms to pixel
     var Lscale=10.0;        // meter to pixel
+ 
+    var inputL1 = Number(document.getElementById('input_L1').value);
+    var inputL2 = Number(document.getElementById('input_L2').value);
+    var inputL3 = Number(document.getElementById('input_L3').value);
 
-    var Ltotal_R = 34.0;      // Real source to detector (m)
-    var Lsc_R = 28.4;        // Real sample chopper distance  (m)
-    var L1_R = 30.0;          // Real source to sample distance (m)
+    var Ltotal_R = inputL1+inputL2;      // Real source to detector (m)
+    var Lsc_R = inputL1-inputL3;        // Real sample chopper distance  (m)
+    var L1_R = inputL1;          // Real source to sample distance (m)
+    
     var TOF_len_R = 80;       // Real TOF max (ms)
     var TOFconst = 2.286;       // TOF at 1 m is 2.286/sqrt(E)
     var upperLimitEi = 80;    // upper limit of Ei 8eV
@@ -204,6 +209,12 @@ function draw_Qxy(){
     var omg1 = Number(document.getElementById('omega1').value);
     var omg2 = Number(document.getElementById('omega2').value);
 
+    if (omg2 < omg1){
+        var temp_omg2 = omg2;
+        omg2=omg1;
+        omg1=temp_omg2;
+    }
+
     var a_star = Number(document.getElementById('a_star').value);
     var b_star = Number(document.getElementById('b_star').value);
     var gamma = Number(document.getElementById('gamma').value);
@@ -278,7 +289,7 @@ function draw_Qxy(){
     document.getElementById('E5_calc').innerHTML = Math.round(Ei[4]*decimal_digit)/decimal_digit;
 
 
-    //accessible area
+    //accessible area :  Note that for omega > 0, sample rotation is CCW, the accessible area rotates CW
     var cosOmg1 = Math.cos(-Math.PI/180.0*omg1);
     var sinOmg1 = Math.sin(-Math.PI/180.0*omg1);
 
